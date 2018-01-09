@@ -6,6 +6,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Library.DAL
 {
@@ -15,23 +16,21 @@ namespace Library.DAL
         {
             //options.
         }
-        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        //{
-        //    if (!optionsBuilder.IsConfigured)
-        //    {
-        //        // IConfigurationRoot configuration = new ConfigurationBuilder()
-        //        //.SetBasePath(System.AppContext.BaseDirectory)
-        //        //.AddJsonFile("appsettings.json")
-        //        ////  optional: true,
-        //        ////  reloadOnChange: true)
-        //        //.Build();
-        //        // optionsBuilder.UseSqlServer(/*configuration.GetConnectionString("LibraryDatabase")*/ ConnectionString);
-        //       // string connstr = ConfigurationManager.ConnectionStrings["LibraryDatabase"].ToString();
-        //        optionsBuilder.UseSqlServer(@"'Data Source=User-PC;Initial Catalog=LibraryDB;Integrated Security=True;' name = 'LibraryDatabase' providername = 'System.Data.SqlClient'");
-        //    }
-        //}
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Magazine> Magazines { get; set; }
+        
+        public DbSet<Book> Book { get; set; }
+        public DbSet<Magazine> Magazine { get; set; }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+           // modelBuilder.Entity<Book>().ToTable("Book");
+           // modelBuilder.Entity<Magazine>().ToTable("Magazine");
+            foreach (var entity in modelBuilder.Model.GetEntityTypes())
+            {
+                entity.Relational().TableName = entity.DisplayName();
+            }
+
+        }
     }
     
 }

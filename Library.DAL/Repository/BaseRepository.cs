@@ -19,15 +19,18 @@ namespace Library.DAL.Repository
         }
         public  IEnumerable<T> GetAll() 
         {
-            string query = $"select * from {typeof(T).Name}s";
+            string query = $"select * from {typeof(T).Name}";
             return Connection.Query<T>(query, transaction:Transaction);
         }
         public  T Get(int id)
         {
-            string query = $"select * from {typeof(T).Name}s where Id=@id";
+            string query = $"select * from {typeof(T).Name} where Id=@id";
             return Connection.Query<T>(query, new { id=id}, transaction: Transaction).FirstOrDefault();
         }
-        public void Create(T item) => Connection.Insert<T>(item);
+        public void Create(T item)
+        {
+          int result=  Connection.Insert<T>(item, transaction: Transaction);
+        }
 
         public void Update(T item) => Connection.Update<T>(item);
         public  void Delete(int id)

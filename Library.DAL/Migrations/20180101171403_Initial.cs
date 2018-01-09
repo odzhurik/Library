@@ -10,7 +10,7 @@ namespace Library.DAL.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Books",
+                name: "Book",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -20,11 +20,11 @@ namespace Library.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Books", x => x.Id);
+                    table.PrimaryKey("PK_Book", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Magazines",
+                name: "Magazine",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -34,17 +34,17 @@ namespace Library.DAL.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Magazines", x => x.Id);
+                    table.PrimaryKey("PK_Magazine", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Books");
+                name: "Book");
 
             migrationBuilder.DropTable(
-                name: "Magazines");
+                name: "Magazine");
         }
     }
 }

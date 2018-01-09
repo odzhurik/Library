@@ -1,16 +1,17 @@
-﻿<h1>Weather forecast</h1>
+﻿
+<h1>Books</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+
 
 <p *ngIf="!books"><em>Loading...</em></p>
-
+<button class="btn-success" style="float:right;" (click)="showAddModal()"> Add + </button>
 <table class='table' *ngIf="books">
     <thead>
         <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Author</th>
+            <th>Page</th>
         </tr>
     </thead>
     <tbody>
@@ -22,3 +23,37 @@
         </tr>
     </tbody>
 </table>
+<bs-modal  #modal>
+    <bs-modal-header [showDismiss]="true">
+        <h4 class="modal-title">I'm a modal!</h4>
+    </bs-modal-header>
+    <bs-modal-body>
+        <div class="col-xs-10">
+            <div class="form-group">
+                <label>Name</label>
+                <input class="form-control" name="name"
+                       [(ngModel)]="book.name"  />
+            </div>
+            <div class="form-group">
+                <label>Author</label>
+                <input type="text" class="form-control" name="author"
+                       [(ngModel)]="book.author" />
+            </div>
+            <div class="form-group">
+                <label>Page</label>
+                <input type="number" class="form-control" name="page"
+                       [(ngModel)]="book.page" />
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" (click)="addBook()">
+                    Add
+                </button>
+            </div>
+           
+        </div>
+    </bs-modal-body>
+    <bs-modal-footer>
+        <button type="button" class="btn btn-default">Close</button>
+        <button type="button" class="btn btn-primary" autofocus>Go</button>
+    </bs-modal-footer>
+</bs-modal>

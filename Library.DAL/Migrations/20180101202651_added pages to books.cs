@@ -10,7 +10,7 @@ namespace Library.DAL.Migrations
         {
             migrationBuilder.AddColumn<int>(
                 name: "Page",
-                table: "Books",
+                table: "Book",
                 nullable: false,
                 defaultValue: 0);
         }
@@ -19,7 +19,7 @@ namespace Library.DAL.Migrations
         {
             migrationBuilder.DropColumn(
                 name: "Page",
-                table: "Books");
+                table: "Book");
         }
     }
 }

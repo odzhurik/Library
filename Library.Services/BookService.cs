@@ -26,14 +26,17 @@ namespace Library.Services
         public void Update(Book book)
         {
             _unitOfWork.Books.Update(book);
+            _unitOfWork.Commit();
         }
         public void Create(Book book)
         {
             _unitOfWork.Books.Create(book);
+            _unitOfWork.Commit();
         }
         public void Delete(int id)
         {
             _unitOfWork.Books.Delete(id);
+            _unitOfWork.Commit();
         }
     }
 }

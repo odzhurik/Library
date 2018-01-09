@@ -34,7 +34,7 @@ namespace Library.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Book");
                 });
 
             modelBuilder.Entity("Library.Entities.Magazine", b =>
@@ -48,7 +48,7 @@ namespace Library.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Magazines");
+                    b.ToTable("Magazine");
                 });
 #pragma warning restore 612, 618
         }
