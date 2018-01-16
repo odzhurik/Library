@@ -18,8 +18,8 @@ namespace Library.Web.Controllers
             _bookService = new BookService(_connectionString.GetConnectionString("LibraryDatabase"));
         }
 
-        [HttpGet]
-      // [HttpGet]
+       // [HttpGet]
+       [HttpGet]
         public IEnumerable<Book> Get()
         {
             return _bookService.GetAll();
@@ -36,6 +36,11 @@ namespace Library.Web.Controllers
             return Json(1);
         }
 
-
+        [HttpPut]
+        public IActionResult UpdateBook([FromBody]Book book)
+        {
+            _bookService.Update(book);
+            return Json(1);
+        }
     }
 }

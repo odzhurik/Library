@@ -18,27 +18,44 @@ export class BookComponent implements OnInit {
     @ViewChild('modal') modal : BsModalComponent;
     public books: Book[];
     public book: Book = new Book(0, "", "", 0);
-    constructor(private bookService: BookService) {
-        this.books = new Array<Book>();
+    public title: string;
+    public isAddMode: boolean;
+    constructor(private bookService: BookService) {   
     }
-    ngOnInit() {
-        // this.modal.hiding = true;
-       // this.modal.hiding = true;
-        this.bookService.getBooks().subscribe(data => {
-            // Read the result field from the JSON response.
-            this.books = data as Book[];
-          //  .subscribe((value: Book[]) => {
-          // this.books = value;
-       });
+    ngOnInit() {        
+        this.loadBooks();
     }
     showAddModal() {
-        
+        this.isAddMode = true;
+        this.title = "Add";
         this.modal.open();
     }
-
+    showEditModal(id: number) {
+        
+        this.bookService.getBook(id).subscribe(data => {
+            this.book = data as Book;
+        }
+        );
+        this.isAddMode = false;
+        this.title = "Edit";
+        this.modal.open();
+    }
     addBook()
     {
         this.bookService.saveBook(this.book);
         this.modal.close();
+        this.loadBooks();
+    }
+    updateBook() {
+
+        this.bookService.updateBook(this.book);
+        this.modal.close();
+        this.loadBooks();
+    }
+
+    private loadBooks() {
+        this.bookService.getBooks().subscribe(data => {            
+            this.books = data as Book[];     
+           });
     }
 }

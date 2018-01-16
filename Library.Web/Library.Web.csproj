@@ -35,10 +35,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ConnectionString\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\components\book\book.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\models\book.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\book.service.ts" />

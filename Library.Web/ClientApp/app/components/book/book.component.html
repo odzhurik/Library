@@ -4,7 +4,7 @@
 
 
 <p *ngIf="!books"><em>Loading...</em></p>
-<button class="btn-success" style="float:right;" (click)="showAddModal()"> Add + </button>
+<button *ngIf="books" class="btn-success" style="float:right;" (click)="showAddModal()"> Add + </button>
 <table class='table' *ngIf="books">
     <thead>
         <tr>
@@ -20,12 +20,14 @@
             <td>{{ book.name }}</td>
             <td>{{ book.author }}</td>
             <td>{{ book.page }}</td>
+            <td><a style="cursor:pointer;" (click)="showEditModal(book.id)">Edit</a></td>
+            <td><a style="cursor:pointer;" (click)="showDeleteModal(book.id)">Delete</a></td>
         </tr>
     </tbody>
 </table>
 <bs-modal  #modal>
     <bs-modal-header [showDismiss]="true">
-        <h4 class="modal-title">I'm a modal!</h4>
+        <h4 class="modal-title">{{title}}</h4>
     </bs-modal-header>
     <bs-modal-body>
         <div class="col-xs-10">
@@ -45,15 +47,23 @@
                        [(ngModel)]="book.page" />
             </div>
             <div class="form-group">
-                <button class="btn btn-default" (click)="addBook()">
+
+                <button *ngIf="isAddMode" class="btn btn-default" (click)="addBook()">
                     Add
+                </button>
+                <button *ngIf="!isAddMode" class="btn btn-default" (click)="updateBook()">
+                    Edit
                 </button>
             </div>
            
         </div>
     </bs-modal-body>
     <bs-modal-footer>
-        <button type="button" class="btn btn-default">Close</button>
-        <button type="button" class="btn btn-primary" autofocus>Go</button>
+      
     </bs-modal-footer>
 </bs-modal>
+<style>
+    .modal-header {
+        border-bottom: none !important;
+    }
+</style>

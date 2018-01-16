@@ -32,11 +32,11 @@ namespace Library.DAL.Repository
           int result=  Connection.Insert<T>(item, transaction: Transaction);
         }
 
-        public void Update(T item) => Connection.Update<T>(item);
+        public void Update(T item) => Connection.Update<T>(item, transaction:Transaction);
         public  void Delete(int id)
         {
-            var model = Connection.Get<T>(id);
-            Connection.Delete<T>(model);
+            var model = Connection.Get<T>(id, transaction:Transaction);
+            Connection.Delete<T>(model, transaction:Transaction);
         }
     }
 }
